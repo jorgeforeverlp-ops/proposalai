@@ -716,7 +716,7 @@
     // 3. Simulación de "IA pensando" (Gratis y sin errores)
     await new Promise(resolve => setTimeout(resolve, 2000));
 
- const textoPropuesta = `
+const textoPropuesta = `
         <div style="font-family: 'Georgia', serif; color: #1a1a1a; background: #ffffff; padding: 45px; border-radius: 2px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: left; line-height: 1.6; border-top: 10px solid #C9A86A; position: relative;">
             <div style="text-align: right; color: #C9A86A; font-weight: bold; margin-bottom: 25px; font-size: 0.85em; letter-spacing: 1px;">REF: PROP-${Math.floor(Math.random() * 9000) + 1000}</div>
             
@@ -727,17 +727,17 @@
 
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 30px; border-left: 5px solid #C9A86A; padding-left: 15px; font-weight: bold;">2. Plan de Acción Detallado</h3>
             <ul style="list-style: none; padding-left: 5px; color: #333;">
-                <li style="margin-bottom: 12px;"><strong>• Análisis de Marca:</strong> Adaptación de <strong>${serviceType}</strong> específicamente para <strong>${clientName}</strong>.</li>
-                <li style="margin-bottom: 12px;"><strong>• Implementación Técnica:</strong> Ejecución de la estrategia basada en el presupuesto de <strong>${budget}</strong>.</li>
-                <li style="margin-bottom: 12px;"><strong>• Entrega y Revisión:</strong> Optimización final de los activos para asegurar el éxito de <em>"${projectDesc}"</em>.</li>
+                <li style="margin-bottom: 12px;"><strong>• Análisis de Marca:</strong> Adaptación de ${serviceType} específicamente para ${clientName}.</li>
+                <li style="margin-bottom: 12px;"><strong>• Implementación Técnica:</strong> Ejecución de la estrategia basada en el presupuesto de ${budget}.</li>
+                <li style="margin-bottom: 12px;"><strong>• Entrega y Revisión:</strong> Optimización final de los activos para asegurar el éxito en "${projectDesc}".</li>
             </ul>
 
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 30px; border-left: 5px solid #C9A86A; padding-left: 15px; font-weight: bold;">3. Inversión Estimada</h3>
-            <p style="color: #333; font-size: 1.1em;">El presupuesto seleccionado para este despliegue es de <strong>${budget}</strong>.</p>
+            <p style="color: #333; font-size: 1.1em;">Presupuesto total para este despliegue: <strong>${budget}</strong>.</p>
 
             <div style="margin-top: 45px; padding: 25px; background: #1a1a1a; border-radius: 4px; text-align: center;">
                 <p style="margin: 0; font-weight: bold; color: #C9A86A; text-transform: uppercase; letter-spacing: 2px;">¿Cómo empezamos?</p>
-                <p style="margin: 10px 0 0 0; font-size: 0.9em; color: #ffffff;">Si está conforme con estos puntos, responda para enviarle el contrato oficial.</p>
+                <p style="margin: 10px 0 0 0; font-size: 0.9em; color: #ffffff;">Responda a este documento para formalizar el inicio del proyecto.</p>
             </div>
 
             <p style="text-align: center; margin-top: 50px; font-size: 0.7em; color: #bbb; letter-spacing: 3px; text-transform: uppercase;">
