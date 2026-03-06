@@ -723,26 +723,26 @@
             <h1 style="color: #1a1a1a; font-size: 24px; text-transform: uppercase; border-bottom: 2px solid #C9A86A; padding-bottom: 15px; margin-bottom: 30px; letter-spacing: 1px; font-weight: 700;">Propuesta Estratégica: ${clientName.toUpperCase()}</h1>
             
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 30px; border-left: 5px solid #C9A86A; padding-left: 15px; font-weight: bold;">1. Objetivos del Proyecto</h3>
-            <p style="color: #333; margin-bottom: 20px;">Tras analizar su solicitud para "${projectDesc || 'su sector'}", hemos diseñado una hoja de ruta para potenciar su marca mediante <strong>${serviceType}</strong>.</p>
+            <p style="color: #333; margin-bottom: 20px;">Tras analizar su solicitud para <strong>"${projectDesc || 'su sector'}"</strong>, hemos trazado una estrategia para potenciar su marca mediante <strong>${serviceType}</strong>.</p>
 
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 30px; border-left: 5px solid #C9A86A; padding-left: 15px; font-weight: bold;">2. Plan de Acción Detallado</h3>
             <ul style="list-style: none; padding-left: 5px; color: #333;">
-                <li style="margin-bottom: 12px;"><strong>• Análisis:</strong> Adaptación de ${serviceType} para la identidad de ${clientName}.</li>
-                <li style="margin-bottom: 12px;"><strong>• Ejecución:</strong> Implementación técnica optimizada para el rango de ${budget}.</li>
-                <li style="margin-bottom: 12px;"><strong>• Cierre:</strong> Revisión final de objetivos para asegurar el éxito en su mercado.</li>
+                <li style="margin-bottom: 12px;"><strong>• Fase 1:</strong> Auditoría de identidad y mercado para <strong>${clientName}</strong>.</li>
+                <li style="margin-bottom: 12px;"><strong>• Fase 2:</strong> Desarrollo de activos de <strong>${serviceType}</strong> bajo estándares de alta gama.</li>
+                <li style="margin-bottom: 12px;"><strong>• Fase 3:</strong> Entrega final y revisión de objetivos para <strong>"${projectDesc}"</strong>.</li>
             </ul>
 
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 30px; border-left: 5px solid #C9A86A; padding-left: 15px; font-weight: bold;">3. Inversión Estimada</h3>
             <p style="color: #333; font-size: 1.1em;">Presupuesto total para este despliegue: <strong>${budget}</strong>.</p>
 
             <div style="margin-top: 45px; padding: 25px; background: #1a1a1a; border-radius: 4px; text-align: center;">
-                <p style="margin: 0; font-weight: bold; color: #C9A86A; text-transform: uppercase; letter-spacing: 2px;">¿Cómo empezamos?</p>
-                <p style="margin: 10px 0 0 0; font-size: 0.95em; color: #ffffff;">Responda a este documento para formalizar el inicio del proyecto.</p>
+                <p style="margin: 0; font-weight: bold; color: #C9A86A; text-transform: uppercase; letter-spacing: 2px;">¿Cómo procedemos?</p>
+                <a href="mailto:tuemail@ejemplo.com?subject=Aceptación de Propuesta - ${clientName}" style="display: inline-block; margin-top: 15px; padding: 12px 25px; background: #C9A86A; color: #1a1a1a; text-decoration: none; font-weight: bold; border-radius: 2px; text-transform: uppercase; font-size: 0.8em;">Aprobar y empezar ahora</a>
             </div>
+            
             <p style="text-align: center; margin-top: 50px; font-size: 0.7em; color: #bbb; letter-spacing: 3px; text-transform: uppercase;">Documento generado por ProposalAI • 2026</p>
         </div>
     `;
-
     // 5. Mostramos el resultado final
     if (loading) loading.style.display = 'none';
     if (resultDiv) {
