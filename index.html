@@ -702,20 +702,6 @@
     }
 
     // 2. Control visual de la página
-    const btn = document.getElementById('generateBtn');
-    const ph = document.getElementById('placeholderState');
-    const loading = document.getElementById('loadingState');
-    const resultDiv = document.getElementById('proposalResult');
-
-    // Mostramos cargando
-    btn.disabled = true;
-    if (ph) ph.style.display = 'none';
-    if (resultDiv) resultDiv.style.display = 'none';
-    if (loading) loading.style.display = 'flex';
-
-    // 3. Simulación de "IA pensando" (Gratis y sin errores)
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
 const textoPropuesta = `
         <div style="font-family: 'Georgia', serif; color: #1a1a1a; background: #ffffff; padding: 45px; border-radius: 2px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: left; line-height: 1.6; border-top: 10px solid #C9A86A; position: relative;">
             <div style="text-align: right; color: #C9A86A; font-weight: bold; margin-bottom: 25px; font-size: 0.85em; letter-spacing: 1px;">REF: PROP-${Math.floor(Math.random() * 9000) + 1000}</div>
@@ -723,13 +709,13 @@ const textoPropuesta = `
             <h1 style="color: #1a1a1a; font-size: 24px; text-transform: uppercase; border-bottom: 2px solid #C9A86A; padding-bottom: 15px; margin-bottom: 30px; letter-spacing: 1px; font-weight: 700;">Propuesta Estratégica: ${clientName.toUpperCase()}</h1>
             
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 30px; border-left: 5px solid #C9A86A; padding-left: 15px; font-weight: bold;">1. Objetivos del Proyecto</h3>
-            <p style="color: #333; margin-bottom: 20px;">Tras analizar su solicitud para <strong>"${projectDesc || 'su sector'}"</strong>, hemos trazado una hoja de ruta para potenciar su marca mediante un servicio de <strong>${serviceType}</strong> de alto nivel.</p>
+            <p style="color: #333; margin-bottom: 20px;">Tras analizar su solicitud para <strong>"${projectDesc || 'su sector'}"</strong>, hemos diseñado una hoja de ruta para potenciar su marca mediante <strong>${serviceType}</strong>.</p>
 
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 30px; border-left: 5px solid #C9A86A; padding-left: 15px; font-weight: bold;">2. Plan de Acción Detallado</h3>
             <ul style="list-style: none; padding-left: 5px; color: #333;">
-                <li style="margin-bottom: 12px;"><strong>• Análisis de Marca:</strong> Adaptación de ${serviceType} específicamente para ${clientName}.</li>
-                <li style="margin-bottom: 12px;"><strong>• Implementación Técnica:</strong> Ejecución de la estrategia basada en el presupuesto de ${budget}.</li>
-                <li style="margin-bottom: 12px;"><strong>• Entrega y Revisión:</strong> Optimización final de los activos para asegurar el éxito en "${projectDesc}".</li>
+                <li style="margin-bottom: 12px;"><strong>• Análisis:</strong> Adaptación de ${serviceType} para la identidad de ${clientName}.</li>
+                <li style="margin-bottom: 12px;"><strong>• Ejecución:</strong> Implementación técnica optimizada para el rango de ${budget}.</li>
+                <li style="margin-bottom: 12px;"><strong>• Cierre:</strong> Revisión final de objetivos para asegurar el éxito en "${projectDesc}".</li>
             </ul>
 
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 30px; border-left: 5px solid #C9A86A; padding-left: 15px; font-weight: bold;">3. Inversión Estimada</h3>
@@ -739,25 +725,22 @@ const textoPropuesta = `
                 <p style="margin: 0; font-weight: bold; color: #C9A86A; text-transform: uppercase; letter-spacing: 2px;">¿Cómo empezamos?</p>
                 <p style="margin: 10px 0 0 0; font-size: 0.9em; color: #ffffff;">Responda a este documento para formalizar el inicio del proyecto.</p>
             </div>
-
-            <p style="text-align: center; margin-top: 50px; font-size: 0.7em; color: #bbb; letter-spacing: 3px; text-transform: uppercase;">
-                Documento generado por ProposalAI • 2026
-            </p>
+            <p style="text-align: center; margin-top: 50px; font-size: 0.7em; color: #bbb; letter-spacing: 3px; text-transform: uppercase;">Documento generado por ProposalAI • 2026</p>
         </div>
     `;
-            <h3 style="color: #4F46E5; font-size: 17px; margin-top: 25px; border-left: 4px solid #4F46E5; padding-left: 10px;">1. Objetivos del Proyecto</h3>
-            <p style="color: #4b5563;">Basado en su descripción (<em>"${projectDesc || 'sector comercial'}"</em>), nuestro motor ha definido una estrategia para optimizar su presencia y aumentar la conversión mediante ${serviceType}.</p>
 
-            <h3 style="color: #4F46E5; font-size: 17px; margin-top: 25px; border-left: 4px solid #4F46E5; padding-left: 10px;">2. Plan de Acción Detallado</h3>
-            <ul style="color: #4b5563; padding-left: 20px;">
-                <li style="margin-bottom: 8px;"><strong>Fase 1:</strong> Análisis de competencia y arquitectura de la solución.</li>
-                <li style="margin-bottom: 8px;"><strong>Fase 2:</strong> Desarrollo técnico y optimización de activos digitales.</li>
-                <li style="margin-bottom: 8px;"><strong>Fase 3:</strong> Pruebas de calidad y lanzamiento oficial.</li>
-            </ul>
-
-            <h3 style="color: #4F46E5; font-size: 17px; margin-top: 25px; border-left: 4px solid #4F46E5; padding-left: 10px;">3. Presupuesto y Plazos</h3>
-            <p style="color: #4b5563;">La inversión estimada es de <strong style="color: #111827;">${budget}</strong>, con un tiempo de ejecución de 15 a 21 días laborables.</p>
-
+    // 5. Mostramos el resultado final
+    if (loading) loading.style.display = 'none';
+    if (resultDiv) {
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = textoPropuesta;
+    }
+    btn.disabled = false;
+    btn.textContent = '✦ Generar propuesta con IA';
+}
+</script>
+</body>
+</html>
             <div style="margin-top: 35px; padding: 20px; background: #F3F4F6; border-radius: 6px; text-align: center;">
                 <p style="margin: 0; font-weight: bold; color: #111827;">¿Cómo proceder?</p>
                 <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #4b5563;">Si los términos son correctos, responda a este documento para recibir el contrato formal e iniciar el proyecto.</p>
