@@ -746,12 +746,25 @@ Formato: HTML limpio con etiquetas <h3>, <p>, <ul>, <li>. La sección de precios
       document.getElementById("loadingState").style.display = "none";
       const result = document.getElementById("proposalResult");
       result.style.display = "block";
+      // Force dark theme on all generated content
+      const darkHTML = cleanHTML
+        .replace(/color\s*:\s*#(?:1a1a1a|000000|333333|222222|111111)/gi, 'color:#ffffff')
+        .replace(/background\s*:\s*#(?:ffffff|fff|f[a-f0-9]{5}|white)/gi, 'background:#1a1a1a')
+        .replace(/color\s*:\s*black/gi, 'color:#ffffff')
+        .replace(/color\s*:\s*white/gi, 'color:#ffffff');
+
       result.innerHTML = `
-        <div style="font-family:Georgia,serif;color:#ffffff;background:#1a1a1a;padding:45px;border-radius:2px;box-shadow:0 20px 40px rgba(0,0,0,0.5);border-top:10px solid #C9A86A;">
+        <div style="font-family:Georgia,serif;color:#ffffff;background:#1a1a1a;padding:45px;border-radius:8px;box-shadow:0 20px 40px rgba(0,0,0,0.8);border-top:10px solid #C9A86A;">
           <div style="text-align:right;color:#C9A86A;font-weight:bold;margin-bottom:25px;font-size:0.85em;letter-spacing:1px;">REF: PROP-${Math.floor(Math.random()*9000)+1000}</div>
-          ${cleanHTML}
-          <div style="margin-top:45px;padding:25px;background:#1a1a1a;border-radius:4px;text-align:center;">
-            <p style="margin:0;font-weight:bold;color:#C9A86A;text-transform:uppercase;letter-spacing:2px;">Procedemos?</p>
+          <style>
+            #proposalResult h1,#proposalResult h2,#proposalResult h3,#proposalResult h4{color:#C9A86A!important;border-left:4px solid #C9A86A;padding-left:12px;margin:20px 0 10px;}
+            #proposalResult p,#proposalResult li,#proposalResult span{color:#e0e0e0!important;}
+            #proposalResult ul{padding-left:20px;}
+            #proposalResult *{background:transparent!important;}
+          </style>
+          ${darkHTML}
+          <div style="margin-top:45px;padding:25px;background:#111;border-radius:4px;text-align:center;border:1px solid #C9A86A;">
+            <p style="margin:0;font-weight:bold;color:#C9A86A;text-transform:uppercase;letter-spacing:2px;">¿Procedemos?</p>
             <a href="mailto:tuemail@ejemplo.com" style="display:inline-block;margin-top:15px;padding:12px 25px;background:#C9A86A;color:#1a1a1a;text-decoration:none;font-weight:bold;border-radius:2px;text-transform:uppercase;font-size:0.8em;">Aprobar y empezar</a>
           </div>
         </div>`;
