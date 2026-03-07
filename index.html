@@ -365,6 +365,8 @@
     .price-card.popular { transform: scale(1); }
   }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -559,6 +561,17 @@
           <option value="+25.000€">+25.000 €</option>
         </select>
       </div>
+      <div>
+        <div class="demo-label">Idioma de la propuesta</div>
+        <select class="demo-select" id="language">
+          <option value="español">🇪🇸 Español</option>
+          <option value="inglés">🇬🇧 English</option>
+          <option value="francés">🇫🇷 Français</option>
+          <option value="alemán">🇩🇪 Deutsch</option>
+          <option value="portugués">🇵🇹 Português</option>
+          <option value="italiano">🇮🇹 Italiano</option>
+        </select>
+      </div>
       <button class="demo-generate" id="generateBtn" onclick="generateProposal()">
         ✦ Generar propuesta con IA
       </button>
@@ -574,6 +587,11 @@
         <span>La IA está redactando tu propuesta...</span>
       </div>
       <div id="proposalResult"></div>
+      <div id="downloadBtn" style="display:none; margin-top:16px; text-align:center;">
+        <button onclick="downloadPDF()" style="padding:12px 28px;background:#C9A86A;color:#1a1a1a;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">
+          ⬇️ Descargar propuesta en PDF
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -694,6 +712,7 @@
     const serviceType = document.getElementById('serviceType').value;
     const projectDesc = document.getElementById('projectDesc').value.trim();
     const budget = document.getElementById('budget').value;
+    const language = document.getElementById('language').value;
 
     if (!clientName || !serviceType) {
       alert('Por favor, introduce el nombre del cliente y el tipo de servicio.');
@@ -723,7 +742,7 @@ La propuesta debe incluir:
 5. Inversión detallada (desglose de precios por fase o componente dentro del rango ${budget})
 6. Próximos pasos (llamada a la acción clara)
 
-Formato: HTML limpio con etiquetas <h3>, <p>, <ul>, <li>. La sección de precios debe estar en un div con clase "price-box" y el precio total en un span con clase "big-price". Sé específico, persuasivo y profesional. Máximo 400 palabras.`;
+IMPORTANTE: Genera toda la propuesta completamente en ${language}. Formato: HTML limpio con etiquetas <h3>, <p>, <ul>, <li>. La sección de precios debe estar en un div con clase "price-box" y el precio total en un span con clase "big-price". Sé específico, persuasivo y profesional. Máximo 400 palabras.`;
 
     try {
       const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -746,6 +765,7 @@ Formato: HTML limpio con etiquetas <h3>, <p>, <ul>, <li>. La sección de precios
       document.getElementById("loadingState").style.display = "none";
       const result = document.getElementById("proposalResult");
       result.style.display = "block";
+      document.getElementById("downloadBtn").style.display = "block";
       // Force dark theme on all generated content
       const darkHTML = cleanHTML
         .replace(/color\s*:\s*#(?:1a1a1a|000000|333333|222222|111111)/gi, 'color:#ffffff')
@@ -777,6 +797,47 @@ Formato: HTML limpio con etiquetas <h3>, <p>, <ul>, <li>. La sección de precios
 
     btn.disabled = false;
     btn.innerHTML = '✦ Generar propuesta con IA';
+  }
+
+  async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const element = document.getElementById('proposalResult');
+    const btn = document.querySelector('#downloadBtn button');
+    btn.textContent = '⏳ Generando PDF...';
+    btn.disabled = true;
+
+    try {
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        backgroundColor: '#1a1a1a',
+        useCORS: true
+      });
+
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      let heightLeft = pdfHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+      heightLeft -= pdf.internal.pageSize.getHeight();
+
+      while (heightLeft > 0) {
+        position = heightLeft - pdfHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+        heightLeft -= pdf.internal.pageSize.getHeight();
+      }
+
+      pdf.save('ProposalAI-propuesta.pdf');
+    } catch(e) {
+      alert('Error al generar PDF. Inténtalo de nuevo.');
+    }
+
+    btn.textContent = '⬇️ Descargar propuesta en PDF';
+    btn.disabled = false;
   }
 
   // Smooth scroll
