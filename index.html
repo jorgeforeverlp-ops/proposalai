@@ -739,6 +739,7 @@ Usa border-left: 5px solid #C9A86A en los títulos h3. Fondo blanco, texto oscur
         });
 
         const data = await response.json();
+      console.log(data);
         const text = data.candidates[0].content.parts[0].text;
         const cleanHTML = text.replace(/```html/g, '').replace(/```/g, '').trim();
 
